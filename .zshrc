@@ -114,6 +114,11 @@ eval "$(pyenv init --path)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias ls='ls --color=auto'
+alias cat='bat'
+alias v='nvim'
+
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
