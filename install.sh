@@ -24,7 +24,7 @@ echo "Detected Architecture: $ARCH"
 if [[ "$OS" == "Linux" ]]; then
     echo "Installing dependencies using apt..."
     sudo apt update
-    sudo apt install -y zsh tmux git curl fzf fd-find batcat ripgrep
+    sudo apt install -y zsh tmux git curl fzf fd-find bat ripgrep
     LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
     LAZYGIT_ARCH=$(uname -m | sed -e 's/aarch64/arm64/')
     curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_${LAZYGIT_ARCH}.tar.gz"
