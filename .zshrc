@@ -117,7 +117,12 @@ ZSH_THEME="robbyrussell"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls='ls --color=auto'
-alias cat='bat'
+
+if [[ $(uname -om) == 'Darwin arm64' || $(uname -om) == 'Darwin x86_64' ]]; then
+    alias cat='bat'
+else
+    alias cat='batcat'
+fi
 alias v='nvim'
 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
@@ -125,7 +130,7 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-if [[ $(uname -m) == 'arm64' ]]; then
+if [[ $(uname -om) == 'Darwin arm64' ]]; then
     # echo "Apple Silicon Mac detected"
     source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 elif [[ $(uname -om) == 'Darwin x86_64' ]]; then
