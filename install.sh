@@ -32,6 +32,7 @@ if [[ "$OS" == "Linux" ]]; then
     sudo install lazygit -D -t /usr/local/bin/
     # Add Powerlevel10k if needed
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git
+    rm -rf $HOME/powerlevel10k
     mv powerlevel10k/ $HOME/
 
 elif [[ "$OS" == "Darwin" ]]; then
