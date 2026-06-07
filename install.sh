@@ -72,7 +72,7 @@ for file in "${FILES[@]}"; do
         if [[ -f "$HOME/$file" ]]; then
             echo "$file exists."
             echo "Checking if $HOME/config-backup/ exists"
-            if [[ ! -d "$HOME/config-backup"]]; then
+            if [[ ! -d "$HOME/config-backup" ]]; then
                 echo "$HOME/config-backup/ does not exists"
                 echo "Creating $HOME/config-backup/ directory"
                 mkdir -p "$HOME/config-backup/"
