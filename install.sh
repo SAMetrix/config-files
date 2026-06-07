@@ -13,6 +13,8 @@ CONFIG_DIR="$HOME/config-files"
 # List of config files to copy
 FILES=(".zshrc" ".tmux.conf" ".p10k.zsh")
 
+DATE="$(date +%s)"
+
 # Detect OS type
 OS="$(uname -s)"
 ARCH="$(uname -m)"
@@ -66,11 +68,26 @@ fi
 echo "Copying config files into home directory..."
 for file in "${FILES[@]}"; do
     if [[ -f "$CONFIG_DIR/$file" ]]; then
-        cp "$CONFIG_DIR/$file" "$HOME/$file"
-        echo "Copied $file to $HOME/$file"
+        echo "Checking if file $file exists"
+        if [[ -f "$HOME/$file" ]]; then
+            echo "$file exists."
+            echo "Checking if $HOME/config-backup/ exists"
+            if [[ ! -d "$HOME/config-backup"]]; then
+                echo "$HOME/config-backup/ does not exists"
+                echo "Creating $HOME/config-backup/ directory"
+                mkdir -p "$HOME/config-backup/"
+                echo "$HOME/config-backup/ created successfully"
+            fi
+            echo "Moving existing $file to $HOME/config-backup/"
+            mv "$HOME/$file" "$HOME/config-backup/$file.bak.$DATE"
+            echo "Copying $CONFIG_DIR/$file to $HOME/$file"
+            cp "$CONFIG_DIR/$file" "$HOME/$file"
+            echo "Copied $file to $HOME/$file"
+        fi
     else
         echo "Warning: $CONFIG_DIR/$file not found, skipping..."
     fi
 done
 
 echo "✅ Setup complete! Restart your shell or tmux to apply changes."
+# mv .zshrc .zshrc.bak.$DATE
